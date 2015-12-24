@@ -7,7 +7,7 @@ import sys
 import pefile
 import glob
 import struct
-pefiledir = r"d:\Working_Data\Vunl_Work\Crack_WPS_ProSuite\Code\*.dll"
+pefiledir = r"d:\*.dll"
 
 class GetPERightInfo():
     def __init__(self):
