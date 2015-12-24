@@ -20,7 +20,7 @@ Process finished with exit code 0
 ```
 # 更新日志
 ## 2015.12.25
-解决 UnicodeEncodeError: 'gb2312' codec can't encode character u'\xa9' in position 9: illegal multibyte sequence
+解决 `UnicodeEncodeError: 'gb2312' codec can't encode character u'\xa9' in position 9: illegal multibyte sequence`
 <br />
 参考链接:
 [解决Python2.7的UnicodeEncodeError: ‘ascii’ codec can’t encode异常错误](http://wangye.org/blog/archives/629/)
