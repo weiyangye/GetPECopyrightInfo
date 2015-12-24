@@ -1,17 +1,27 @@
 # *.* coding=utf-8
 __time__ = '2015.12.14'
 __author__ = 'weiyangye@hotmail.com'
-
+# C:\Python27\python.exe
 import os
 import sys
 import pefile
 import glob
 import struct
-pefiledir = r"d:\*.dll"
+
+# to fix
+'''
+UnicodeEncodeError: 'gb2312' codec can't encode character u'\xa9' in position 9: illegal multibyte sequence
+url:http://wangye.org/blog/archives/629/
+'''
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+pefiledir = r"D:\Program Files\WizNote\*.dll" # PE dir , you can select pe file dir path.
 
 class GetPERightInfo():
     def __init__(self):
         self.filelist = []
+        self.info_file = open('pefile_info.txt','a')
 
     def enumerate_pefile(self):  # enumerate_pefile and add to filelist
         # print os.listdir(pefiledir)
@@ -28,6 +38,8 @@ class GetPERightInfo():
         for peFile in pe_list:
             print "PEFile_Path: " + peFile
             print "PE INFO: "
+            self.info_file.write("PEFile_Path: " + peFile + '\n')
+            self.info_file.write("PE INFO: \n")
             mype = pefile.PE(peFile)
             # mype = pefile.PE(pefilepath)
             # print pe # parse_version_information('MajorLinkerVersion')
@@ -37,8 +49,11 @@ class GetPERightInfo():
                         if hasattr(entry, 'StringTable'):
                             for st in entry.StringTable:
                                 for k, v in st.entries.items():
+                                    #print k + ": " + v
                                     print k + ": " + v
-            print '\n'
+                                    self.info_file.write(k + ": " + v + '\n')
+        self.info_file.close()
+
 
 
     def isPeFile(self,filepath):
@@ -64,7 +79,8 @@ class GetPERightInfo():
 
 if __name__=='__main__':
     print 'main_funciton'
-    ger = GetPERightInfo()
-    pe_l = ger.enumerate_pefile()
-    print pe_l
-    ger.getpeinfo(pe_l)
+    ger = GetPERightInfo() # 初始化 类的实例
+    pe_l = ger.enumerate_pefile() # get pefile list
+    ger.getpeinfo(pe_l)  # use pefile list to parse pefile and get Copyright info
+
+
