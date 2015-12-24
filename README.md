@@ -21,5 +21,13 @@ Process finished with exit code 0
 # 更新日志
 ## 2015.12.25
 解决 UnicodeEncodeError: 'gb2312' codec can't encode character u'\xa9' in position 9: illegal multibyte sequence
+\br
 参考链接:
 [解决Python2.7的UnicodeEncodeError: ‘ascii’ codec can’t encode异常错误](http://wangye.org/blog/archives/629/)
+
+# 注意事项
+## 1. 在windows 7 中文32位下，需使用如下方式执行才能得到正确结果
+```
+C:\Users\Admin\Desktop\GetPECopyrightInfo>ParserPE.py >11.txt
+```
+猜测原因是由于操作系统字符集造成的问题
